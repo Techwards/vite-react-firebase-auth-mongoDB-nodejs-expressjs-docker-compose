@@ -18,8 +18,13 @@ export default function Home() {
         }
     },[currentUser])
 
+
+    // handle functions
     function handleLogout (e) {
         logout()
+    }
+    function handleUpdateProfile () {
+        history.push('/update-profile')
     }
 
     return (
@@ -31,6 +36,10 @@ export default function Home() {
                         <h1>My home</h1>
                         <Button variant="contained" color="primary" onClick={handleLogout}>
                             Logout
+                        </Button>
+                        <br/>
+                        <Button variant="contained" color="secondary" onClick={handleUpdateProfile}>
+                            Update profile
                         </Button>
                     </div>
                 ):

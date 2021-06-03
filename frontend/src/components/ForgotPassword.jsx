@@ -52,20 +52,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
     const classes = useStyles();
-    const { login } = useAuth()
-    const history = useHistory()
+    const { resetPassword } = useAuth()
 
     async function handleSubmit(e) {
         e.preventDefault()
         
         const signinFields = {
             email: e.target.email.value,
-            password: e.target.password.value
         }
     
         try {
-            await login(signinFields.email, signinFields.password)
-            history.push("/")
+            await resetPassword(signinFields.email)
             } catch {
                 console.log("Failed to log in")
             }
@@ -76,10 +73,10 @@ export default function SignIn() {
         <CssBaseline />
         <div className={classes.paper}>
             <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
+                <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-                Sign in
+                Reset Password
             </Typography>
             <form className={classes.form} onSubmit={handleSubmit} noValidate>
                 <TextField
@@ -93,21 +90,7 @@ export default function SignIn() {
                     autoComplete="email"
                     autoFocus
                 />
-                <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
-                />
-                <FormControlLabel
-                    control={<Checkbox value="remember" color="primary" />}
-                    label="Remember me"
-                />
+                
                 <Button
                     type="submit"
                     fullWidth
@@ -115,18 +98,13 @@ export default function SignIn() {
                     color="primary"
                     className={classes.submit}
                 >
-                    Sign In
+                    Reset Password
                 </Button>
                 <Grid container>
-                    <Grid item xs>
-                    <Link href="/forgot-password" variant="body2">
-                        Forgot password?
-                    </Link>
-                    </Grid>
                     <Grid item>
-                    <Link href="/signup" variant="body2">
-                        {"Don't have an account? Sign Up"}
-                    </Link>
+                        <Link href="/signup" variant="body2">
+                            {"Don't have an account? Sign Up"}
+                        </Link>
                     </Grid>
                 </Grid>
             </form>
