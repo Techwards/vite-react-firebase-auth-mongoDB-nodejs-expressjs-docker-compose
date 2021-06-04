@@ -1,11 +1,12 @@
 import React, { useContext, useState, useEffect } from "react"
 import { auth } from "../firebase"
+import { userServices } from '../services/user'
 
 const AuthContext = React.createContext()
 
 export function useAuth() {
     return useContext(AuthContext)
-    }
+}
 
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState()
@@ -36,9 +37,26 @@ export function AuthProvider({ children }) {
     }
 
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(user => {
-        setCurrentUser(user)
-        setLoading(false)
+        const unsubscribe = auth.onAuthStateChanged(async (user) => {
+            setCurrentUser(user)
+            setLoading(false)
+            if(user) {
+                
+                const { token } = await user.getIdTokenResult()
+                
+                const payload = {}
+                userServices
+                    .currentUser(payload, token)
+                    .then(res => {
+                        console.log('res: ', res);
+                    })
+                    .catch(err=> {
+                        console.log('err: ', err);
+                    })
+                    .finally(()=>{
+                        //clean up
+                    })
+            }
         })
 
         return unsubscribe
