@@ -76,6 +76,7 @@ export default function SignIn() {
         googleLogin()
             .then(res=>{
                 console.log('res: ', res);
+                history.push("/")
             })
             .catch(err=> {
                 console.log('err: ', err);

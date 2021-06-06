@@ -1,40 +1,37 @@
 const firebaseAdmin = require('../firebase')
+const Users = require('../models/users')
+
 
 const UserControllers = (
     function() {
 
         const currentUser = async (req, res) => {
-            console.log('req.headers: ', req.headers.token);
+
             try {
                 const firebaseUser = await firebaseAdmin.auth().verifyIdToken(req.headers.token)
+                const user = await Users.findOne({email:firebaseUser.email })
                 
-                console.log('req: ', firebaseUser);
-                res.json(firebaseUser)
+                if(user) {
+                    res.json(user)
+                } else {
+                    const newUser = new Users({
+                        name: firebaseUser.name || '',
+                        fullName: firebaseUser.fullName || '',
+                        email: firebaseUser.email || '',
+                        firstName: firebaseUser.firstName || '',
+                        lastName: firebaseUser.lastName || '',
+                        picture: firebaseUser.picture || '',
 
-
+                    })
+                    newUser.save()
+                    res.json(newUser)
+                }
             } catch (error) {
+                console.log('error: ', error);
                 res.status(401).json({
                     error
                 })
             }
-            // const userInfo = await req.oidc.fetchUserInfo()
-            
-            // const user = await User.findOne({auth0Id: req.oidc.user.sub})
-            // if(user) {
-            //     console.log('User exist')
-            // } else {
-            //     console.log('New User')
-            //     const oidcUserInfo = {
-            //         auth0Id: req.oidc.user.sub,
-            //         firstName: req.oidc.user.given_name,
-            //         lastName: req.oidc.user.family_name,
-            //         fullName: req.oidc.user.name,
-            //         picture: req.oidc.user.picture,
-            //         email: req.oidc.user.email
-            //     }
-            //     new User(oidcUserInfo).save()
-            // }
-            
         }
 
         return {

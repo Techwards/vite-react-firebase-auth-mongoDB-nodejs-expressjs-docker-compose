@@ -14,7 +14,7 @@ app.use(express.json())
 const publicRoutes = require('./routes/publicRoutes')
 
 // models
-const userModel = require('./models/users')
+// const UserModel = require('./models/users')
 
 // DB connection
 mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true}, function(error) {
@@ -31,7 +31,7 @@ mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopo
 })
 
 // schema models
-userModel()
+// UserModel()
 
 // auth0 middleware end
 
