@@ -4,12 +4,9 @@ export const userServices = (
         const BASE_URL = 'http://localhost:3200'
 
         // current user
-        function currentUser (payload, token) {
-            const url = `${BASE_URL}/current-user`
-            const headers = {
-                    token: token
-                }
-            return ApiService.post(url, payload, headers)
+        function currentUser (payload) {
+            const url = `/current-user`
+            return ApiService.postWithAuth(url, payload)
         }
 
         return {

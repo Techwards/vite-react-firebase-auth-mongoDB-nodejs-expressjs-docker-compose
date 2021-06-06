@@ -42,11 +42,9 @@ export function AuthProvider({ children }) {
             setLoading(false)
             if(user) {
                 
-                const { token } = await user.getIdTokenResult()
-                
                 const payload = {}
                 userServices
-                    .currentUser(payload, token)
+                    .currentUser(payload)
                     .then(res => {
                         console.log('res: ', res);
                     })
