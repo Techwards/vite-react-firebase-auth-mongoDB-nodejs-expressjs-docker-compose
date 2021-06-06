@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
     const classes = useStyles();
-    const { login } = useAuth()
+    const { login, googleLogin } = useAuth()
     const history = useHistory()
 
     async function handleSubmit(e) {
@@ -69,6 +69,17 @@ export default function SignIn() {
             } catch {
                 console.log("Failed to log in")
             }
+    }
+
+    async function handleGoogleSignin(e) {
+        
+        googleLogin()
+            .then(res=>{
+                console.log('res: ', res);
+            })
+            .catch(err=> {
+                console.log('err: ', err);
+            })
     }
 
     return (
@@ -130,6 +141,16 @@ export default function SignIn() {
                     </Grid>
                 </Grid>
             </form>
+            <Button
+                type="button"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={handleGoogleSignin}
+            >
+                Sign In With Google
+            </Button>
         </div>
         <Box mt={8}>
             <Copyright />
