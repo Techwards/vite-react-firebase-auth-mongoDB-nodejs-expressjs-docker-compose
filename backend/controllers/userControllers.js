@@ -6,7 +6,6 @@ const UserControllers = (
     function() {
 
         const currentUser = async (req, res) => {
-
             try {
                 const firebaseUser = await firebaseAdmin.auth().verifyIdToken(req.headers.token)
                 const user = await Users.findOne({email:firebaseUser.email })

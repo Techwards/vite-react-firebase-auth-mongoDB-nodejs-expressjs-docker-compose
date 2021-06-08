@@ -1,0 +1,37 @@
+version: "3.9"
+services: 
+    vite-react-firebase-auth-mongodb-nodejs-expressjs-docker-compose-be:
+        container_name: "vite_backend"
+        build:
+            context: ./backend
+            dockerfile: Dockerfile.dev
+        volumes: 
+            - ./backend:/usr/vite-react-firebase-auth-mongodb-nodejs-expressjs-docker-compose-be
+            - /usr/vite-react-firebase-auth-mongodb-nodejs-expressjs-docker-compose-be/node_modules
+        command: npm start
+        ports: 
+            - 3200:3200
+        depends_on:
+            - db
+        # links:
+        #     - db
+        restart: on-failure
+    db:
+        image: mongo
+        restart: always
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: techwards
+            MONGO_INITDB_ROOT_PASSWORD: techwards
+    vite-react-firebase-auth-mongodb-nodejs-expressjs-docker-compose-fe:
+        container_name: "vite_frontend"
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile
+        volumes: 
+            - ./frontend:/usr/vite-react-firebase-auth-mongodb-nodejs-expressjs-docker-compose-fe
+        command: npm run dev
+        ports: 
+            - 3000:3000
+        
+volumes: 
+    vite-react-firebase-auth-mongoDB-nodejs-expressjs-docker-compose:

@@ -28,7 +28,7 @@ const { Schema } = mongoose
             trim: true,
             unique: true,
             require: true
-        }
+        },
     }, { timestamps:true })
     // mongoose.model('Users', userSchema)
 // }
