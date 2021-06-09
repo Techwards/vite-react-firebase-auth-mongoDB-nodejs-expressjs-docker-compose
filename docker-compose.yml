@@ -27,8 +27,8 @@ services:
         build:
             context: ./frontend
             dockerfile: Dockerfile
-        volumes: 
-            - ./frontend:/usr/vite-react-firebase-auth-mongodb-nodejs-expressjs-docker-compose-fe
+        # volumes: 
+        #     - ./frontend:/usr/vite-react-firebase-auth-mongodb-nodejs-expressjs-docker-compose-fe
         command: npm run dev
         ports: 
             - 3000:3000

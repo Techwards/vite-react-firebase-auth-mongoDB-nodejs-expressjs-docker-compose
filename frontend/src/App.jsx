@@ -12,7 +12,8 @@ import SignUp from './components/signup'
 import Home from './components/Home'
 import UpdateProfile from './components/UpdateProfile'
 import ForgotPassword from './components/ForgotPassword'
-
+import SendEmailLink from './components/SendEmailLink'
+import VerifyEmailLink from './components/VerifyEmailLink'
 // context
 import { AuthProvider } from './context/AuthContext'
 
@@ -41,6 +42,12 @@ function App() {
                         </Route>
                         <Route path="/update-profile">
                             <UpdateProfile />
+                        </Route>
+                        <Route path="/send-email-link">
+                            <SendEmailLink/>
+                        </Route>
+                        <Route path="/verify-email-link">
+                            <VerifyEmailLink/>
                         </Route>
                     </PrivateRoute>
                 </Switch>
