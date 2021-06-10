@@ -3,5 +3,5 @@ node_modules
 dist
 dist-ssr
 *.local
-backend/firebase/serviceAccountKey.json
+backend/firebase/serviceAccountKey.js
 package-lock.json
