@@ -1,4 +1,4 @@
-FROM node
+FROM node:alpine
 
 # RUN addgroup productMarketFitProjectBE && adduser -S -G productMarketFitProjectBE productMarketFitProjectBE
 # USER productMarketFitProjectBE
