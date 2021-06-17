@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { Link, useHistory } from "react-router-dom"
 import { useAuth } from '../context/AuthContext'
 
@@ -9,41 +9,52 @@ export default function Home() {
     const { currentUser, logout } = useAuth()
     const history = useHistory()
 
-    useEffect(()=> {
+    useEffect(() => {
         console.log('currentUser: ', currentUser);
-        if(!currentUser) {
+        if (!currentUser) {
             history.push("/signin")
         } else {
             history.push("/")
         }
-    },[currentUser])
+    }, [currentUser])
 
 
     // handle functions
-    function handleLogout (e) {
+    function handleLogout(e) {
         logout()
     }
-    function handleUpdateProfile () {
+    function handleUpdateProfile() {
         history.push('/update-profile')
     }
-
+    function handleSendEmailLink() {
+        history.push({
+            pathname: '/send-email-link',
+            state: {
+                btnName: "Send Email Link"
+            }
+        })
+    }
     return (
         <div>
             {
-                currentUser?
-                (
-                    <div>
-                        <h1>My home</h1>
-                        <Button variant="contained" color="primary" onClick={handleLogout}>
-                            Logout
+                currentUser ?
+                    (
+                        <div>
+                            <h1>My home</h1>
+                            <Button variant="contained" color="primary" onClick={handleLogout}>
+                                Logout
                         </Button>
-                        <br/>
-                        <Button variant="contained" color="secondary" onClick={handleUpdateProfile}>
-                            Update profile
+                            <br />
+                            <Button variant="contained" color="secondary" onClick={handleUpdateProfile}>
+                                Update profile
                         </Button>
-                    </div>
-                ):
-                <h1>Loading...</h1>
+                            <br />
+                            <Button variant="contained" color="secondary" onClick={handleSendEmailLink}>
+                                Send Email Link
+                        </Button>
+                        </div>
+                    ) :
+                    <h1>Loading...</h1>
             }
         </div>
     )
