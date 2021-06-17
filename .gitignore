@@ -3,6 +3,4 @@ node_modules
 dist
 dist-ssr
 *.local
-frontend/package-lock.json
 backend/firebase/serviceAccountKey.js
-package-lock.json
